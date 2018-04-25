@@ -9,6 +9,10 @@ let dy = -2;
 
 const ballRadius = 10;
 
+const paddleHeight = 10;
+const paddleWidth = 75;
+let paddleX = (canvas.width-paddelWidth)/2
+
 function drawBall() {
 
     ctx.beginPath();
@@ -16,6 +20,14 @@ function drawBall() {
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath();
+}
+
+function paddleDraw(){
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath()
 }
 
 function draw() {
