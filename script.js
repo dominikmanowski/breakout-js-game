@@ -11,7 +11,7 @@ const ballRadius = 10;
 
 const paddleHeight = 10;
 const paddleWidth = 75;
-let paddleX = (canvas.width-paddleWidth)/2;
+let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
 let leftPressed = false;
@@ -25,9 +25,9 @@ function drawBall() {
     ctx.closePath();
 }
 
-function drawPaddle(){
+function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
     ctx.fillStyle = "#0095DD";
     ctx.fill();
     ctx.closePath()
@@ -41,20 +41,25 @@ function draw() {
     x += dx;
     y += dy;
 
-    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius){
+    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
     }
 
-    if(y + dy < ballRadius){
+    if (y + dy < ballRadius) {
         dy = -dy;
-    } else if(y + dy > canvas.height-ballRadius){
-        alert("Game over");
-        document.location.reload();
+    } else if (y + dy > canvas.height - ballRadius) {
+        if (x > paddleX && x < paddleX + paddleWidth) {
+            dy = -dy;
+        } else {
+            dy = 0;
+            alert("Game over");
+            document.location.reload();
+        }
     }
 
-    if(rightPressed && paddleX < canvas.width-paddleWidth) {
+    if (rightPressed && paddleX < canvas.width - paddleWidth) {
         paddleX += 7;
-    } else if (leftPressed && paddleX > 0){
+    } else if (leftPressed && paddleX > 0) {
         paddleX += -7;
     }
 
@@ -64,7 +69,7 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyDownHandler(e) {
-    if(e.keyCode === 39) {
+    if (e.keyCode === 39) {
         rightPressed = true;
     }
     else if (e.keyCode === 37) {
@@ -73,7 +78,7 @@ function keyDownHandler(e) {
 }
 
 function keyUpHandler(e) {
-    if(e.keyCode === 39) {
+    if (e.keyCode === 39) {
         rightPressed = false;
     }
     else if (e.keyCode === 37) {
