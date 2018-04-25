@@ -41,18 +41,20 @@ function draw() {
     x += dx;
     y += dy;
 
-    if(x + dx > canvas.width || x + dx < 0){
+    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius){
         dx = -dx;
     }
 
-    if(y + dy > canvas.height || y + dy < 0){
+    if(y + dy < ballRadius){
         dy = -dy;
+    } else if(y + dy > canvas.height-ballRadius){
+        alert("Game over");
+        document.location.reload();
     }
 
     if(rightPressed && paddleX < canvas.width-paddleWidth) {
         paddleX += 7;
-    }
-    else if (leftPressed && paddleX > 0){
+    } else if (leftPressed && paddleX > 0){
         paddleX += -7;
     }
 
